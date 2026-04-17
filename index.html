@@ -649,11 +649,11 @@
   .social-links a:hover { color: var(--color2); }
 
   /* ===== BOTÃO FLUTUANTE WHATSAPP ===== */
-  #btnwhatsapp {
-    position: fixed;
-    bottom: 25px; right: 25px;
-    z-index: 9999;
-    display: none;
+  /* Links sem sublinhado */
+  .btn-whatsapp, .contato-wpp, .contato-info a, #btnwhatsapp a {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
   }
   #btnwhatsapp.ativo {
     display: flex;
@@ -1146,7 +1146,7 @@
       <div class="wa-circulo"><i class="fa-brands fa-whatsapp"></i></div>
     </a>
   </div>
-
+    
   <!-- ===== SCRIPTS ===== -->
   <script>
   window.addEventListener('scroll', function() {
