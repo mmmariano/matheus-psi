@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
@@ -18,39 +18,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- Fontes -->
+  <!-- ===== FONTES ===== -->
+  <!-- Nunito: arredondada, moderna, excelente legibilidade -->
+  <!-- Cormorant Garamond: elegante para títulos (substitui Playfair) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
   /* ===== VARIÁVEIS DE COR ===== */
   :root {
-    --color1: #0f1c2e;   /* Azul marinho escuro */
-    --color2: #c5a059;   /* Dourado */
-    --color3: #7a2021;   /* Vinho */
-    --color4: #e7ecf0;   /* Cinza claro */
-    --color5: #f4f7f6;   /* Fundo sálvia */
+    --color1: #0f1c2e;
+    --color2: #c5a059;
+    --color3: #7a2021;
+    --color4: #e7ecf0;
+    --color5: #f4f7f6;
     --color6: #555;
     --branco: #ffffff;
     --texto: #2c3e50;
     --verde-wa: #25d366;
+
+    /* ===== TIPOGRAFIA PADRONIZADA ===== */
+    --font-titulo: 'Cormorant Garamond', serif;
+    --font-corpo:  'Nunito', sans-serif;
+
+    /* Tamanhos */
+    --fs-h1:      2.8rem;
+    --fs-h2:      2.1rem;
+    --fs-h3:      1.4rem;
+    --fs-subtit:  1.05rem;
+    --fs-corpo:   1rem;
+    --fs-small:   0.88rem;
+    --fs-xsmall:  0.78rem;
+
+    /* Pesos */
+    --fw-light:   300;
+    --fw-normal:  400;
+    --fw-medium:  500;
+    --fw-semi:    600;
+    --fw-bold:    700;
+
+    /* Espaçamento de leitura */
+    --lh-titulo:  1.2;
+    --lh-corpo:   1.8;
+    --lh-compacto:1.5;
   }
 
   /* ===== RESET ===== */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-corpo);
+    font-size: var(--fs-corpo);
+    font-weight: var(--fw-normal);
     color: var(--texto);
-    line-height: 1.7;
+    line-height: var(--lh-corpo);
     background: var(--color5);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3 { font-family: 'Playfair Display', serif; }
-  h2 { font-size: 2.2rem; color: var(--color1); }
-  p { margin-bottom: 15px; }
+
+  /* ===== TÍTULOS — Cormorant Garamond ===== */
+  h1, h2, h3 {
+    font-family: var(--font-titulo);
+    line-height: var(--lh-titulo);
+    font-weight: var(--fw-semi);
+    letter-spacing: 0.01em;
+  }
+  h2 {
+    font-size: var(--fs-h2);
+    color: var(--color1);
+  }
+  h3 {
+    font-size: var(--fs-h3);
+  }
+
+  /* ===== PARÁGRAFOS ===== */
+  p {
+    margin-bottom: 16px;
+    font-size: var(--fs-corpo);
+    line-height: var(--lh-corpo);
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
   img { max-width: 100%; }
 
   /* ===== UTILITÁRIOS ===== */
@@ -59,7 +112,7 @@
   .padding-topo { padding-top: 70px; }
   .padding-bottom { padding-bottom: 70px; }
   .padding-15 { padding: 15px 0; }
-  .bold { font-weight: 700; }
+  .bold { font-weight: var(--fw-bold); }
   .rounded { border-radius: 30px; }
   .fundo { width: 100%; position: relative; }
 
@@ -70,13 +123,14 @@
     color: white;
     padding: 14px 30px;
     border-radius: 30px;
-    font-weight: 700;
-    font-size: 1rem;
+    font-family: var(--font-corpo);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-corpo);
     text-decoration: none;
     transition: all 0.3s;
     border: none;
     cursor: pointer;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
   .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
 
@@ -86,8 +140,9 @@
     color: var(--color2);
     padding: 10px 25px;
     border-radius: 30px;
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-family: var(--font-corpo);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-small);
     text-decoration: none;
     transition: all 0.3s;
     cursor: pointer;
@@ -114,14 +169,35 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  .menu-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--color1); font-weight: 700; text-decoration: none; letter-spacing: 1px; }
+  .menu-logo {
+    font-family: var(--font-titulo);
+    font-size: 1.15rem;
+    color: var(--color1);
+    font-weight: var(--fw-bold);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+  }
   .menu-links { display: flex; gap: 28px; align-items: center; }
-  .menu-links a { text-decoration: none; color: var(--color1); font-size: 0.88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; transition: color 0.3s; }
+  .menu-links a {
+    text-decoration: none;
+    color: var(--color1);
+    font-family: var(--font-corpo);
+    font-size: 0.82rem;
+    font-weight: var(--fw-semi);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
   .menu-links a:hover { color: var(--color2); }
-  .menu-links .link-agendar { color: var(--verde-wa); border: 1.5px solid var(--verde-wa); padding: 7px 18px; border-radius: 20px; }
+  .menu-links .link-agendar {
+    color: var(--verde-wa);
+    border: 1.5px solid var(--verde-wa);
+    padding: 7px 18px;
+    border-radius: 20px;
+  }
   .menu-links .link-agendar:hover { background: var(--verde-wa); color: white; }
 
-  /* ===== HERO (ABERTURA) ===== */
+  /* ===== HERO DESKTOP ===== */
   .hero-section {
     position: relative;
     height: 100vh;
@@ -141,7 +217,6 @@
     object-position: center top;
   }
 
-  /* SVG decorativo que divide a foto do conteúdo */
   .hero-divisor {
     position: absolute;
     top: 0;
@@ -159,28 +234,32 @@
   }
 
   .hero-pretitulo {
-    font-size: 0.8rem;
+    font-family: var(--font-corpo);
+    font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: var(--color2);
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-weight: var(--fw-bold);
+    margin-bottom: 16px;
     display: block;
   }
 
   .hero-content h1 {
-    font-size: 2.8rem;
-    line-height: 1.2;
+    font-family: var(--font-titulo);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-titulo);
     color: var(--color1);
-    margin-bottom: 25px;
+    margin-bottom: 24px;
   }
 
   .hero-content .hero-sub {
-    font-size: 1rem;
+    font-family: var(--font-corpo);
+    font-size: 1.02rem;
     color: var(--color6);
-    margin-bottom: 30px;
+    margin-bottom: 32px;
     max-width: 430px;
-    line-height: 1.7;
+    line-height: var(--lh-corpo);
+    text-align: left;
   }
 
   /* Hero Mobile */
@@ -189,7 +268,7 @@
     width: 100%;
     min-height: 100vh;
     flex-direction: column;
-    background: var(--color1);
+    background: var(#ADD8E6);
   }
   .hero-mobile-foto {
     width: 100%;
@@ -197,39 +276,46 @@
     object-fit: cover;
     object-position: center top;
   }
-
-  /* SVG curva mobile */
   .hero-mobile-curva { display: block; margin-top: -1px; }
-
   .hero-mobile-conteudo {
     background: var(--color4);
     padding: 30px 25px 50px;
     text-align: center;
   }
-  .hero-mobile-conteudo h1 { font-size: 1.8rem; color: var(--color1); margin-bottom: 15px; }
-  .hero-mobile-conteudo p { font-size: 0.95rem; color: var(--color6); margin-bottom: 20px; }
+  .hero-mobile-conteudo h1 {
+    font-family: var(--font-titulo);
+    font-size: 1.8rem;
+    color: var(--color1);
+    margin-bottom: 15px;
+  }
+  .hero-mobile-conteudo p {
+    font-family: var(--font-corpo);
+    font-size: 0.95rem;
+    color: var(--color6);
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
+  /* ===== BARRA MENU RODAPÉ HERO ===== */
   .barra-menu-rodape {
-  background: #ADD8E6; /* Azul Claro */
-  padding: 10px 0;
-  overflow-x: auto;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Ajuste da cor do texto do menu para leitura */
-.barra-menu-rodape a {
-  display: inline-block;
-  color: #0f1c2e; /* Azul Escuro para dar contraste */
-  text-decoration: none;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 8px 18px;
-  transition: color 0.3s;
-  font-weight: 600;
-}
-
+    background: #ADD8E6;
+    padding: 10px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .barra-menu-rodape a {
+    display: inline-block;
+    color: #0f1c2e;
+    text-decoration: none;
+    font-family: var(--font-corpo);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 8px 18px;
+    transition: color 0.3s;
+    font-weight: var(--fw-semi);
+  }
   .barra-menu-rodape a:hover { color: var(--color2); }
 
   /* ===== SEÇÃO ATENDIMENTO ONLINE ===== */
@@ -237,16 +323,17 @@
     background: var(--color4);
     padding: 80px 20px;
   }
-  .secao-atendimento h2 { color: var(--color1); margin-bottom: 12px; }
+  .secao-atendimento h2 { color: var(--color1); margin-bottom: 16px; }
   .secao-atendimento .subtitulo-secao {
-  font-family: 'Quicksand', sans-serif; /* Fonte arredondada */
-  font-size: 1.4rem !important;        /* Letra maior */
-  color: #0f1c2e;                     /* Tom mais escuro para destaque */
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 20px;
-  letter-spacing: -0.2px;             /* Ajuste de harmonia */
-}
+    font-family: var(--font-corpo);
+    font-size: 1.12rem;
+    color: #0f1c2e;
+    font-weight: var(--fw-semi);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    letter-spacing: 0;
+    text-align: center;
+  }
 
   /* ===== MÉTRICAS / NÚMEROS ===== */
   .secao-numeros {
@@ -263,8 +350,21 @@
     margin: 0 auto;
   }
   .numero-item { text-align: center; color: var(--color1); }
-  .numero-item .num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; display: block; }
-  .numero-item .desc { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .numero-item .num {
+    font-family: var(--font-titulo);
+    font-size: 3rem;
+    font-weight: var(--fw-bold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .numero-item .desc {
+    font-family: var(--font-corpo);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: var(--fw-semi);
+  }
 
   /* ===== COMO TE AJUDO (ACORDEÃO) ===== */
   .secao-ajudo {
@@ -273,7 +373,6 @@
     padding: 80px 0;
     overflow: hidden;
   }
-
   .foto-sessao {
     position: absolute;
     right: 0; top: 0;
@@ -282,47 +381,48 @@
     object-fit: cover;
     object-position: center;
   }
-
   .ajudo-content {
     max-width: 520px;
     padding: 0 20px 0 60px;
     position: relative;
     z-index: 2;
   }
-  .ajudo-content h2 { margin-bottom: 15px; }
-  .ajudo-content > p { margin-bottom: 25px; color: var(--color6); }
+  .ajudo-content h2 { margin-bottom: 14px; }
+  .ajudo-content > p {
+    margin-bottom: 26px;
+    color: var(--color6);
+    font-size: var(--fs-corpo);
+  }
 
   /* Acordeão */
-  .set {
-    margin-bottom: 8px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
+  .set { margin-bottom: 8px; border-radius: 10px; overflow: hidden; }
   .set button {
     width: 100%;
     text-align: left;
     background: var(--branco);
     border: none;
-    padding: 15px 20px;
+    padding: 16px 20px;
+    font-family: var(--font-corpo);
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: var(--fw-semi);
     color: var(--color1);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Lato', sans-serif;
     transition: background 0.3s;
+    letter-spacing: 0.1px;
   }
   .set button:hover { background: #f0f4f8; }
   .set button.aberto .fa-plus { transform: rotate(45deg); }
   .set .content {
     display: none;
     background: rgba(255,255,255,0.7);
-    padding: 15px 20px 20px;
-    font-size: 0.9rem;
+    padding: 16px 20px 22px;
+    font-family: var(--font-corpo);
+    font-size: var(--fs-small);
     color: var(--color6);
-    line-height: 1.7;
+    line-height: var(--lh-corpo);
   }
   .set .content.visivel { display: block; }
   .set .content a { text-decoration: none; }
@@ -341,18 +441,28 @@
     max-width: 1100px;
     margin: 0 auto;
   }
-  .sobre-foto {
-    position: relative;
-  }
+  .sobre-foto { position: relative; }
   .sobre-foto img {
     width: 100%;
     border-radius: 15px;
     display: block;
     box-shadow: 20px 20px 0px var(--color2);
   }
-  .sobre-texto h2 { margin-bottom: 8px; }
-  .sobre-texto .subtitulo { color: var(--color2); font-weight: 700; display: block; margin-bottom: 20px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
-  .sobre-texto p { color: var(--color6); font-size: 0.95rem; text-align: justify; }
+  .sobre-texto h2 { margin-bottom: 10px; }
+  .sobre-texto .subtitulo {
+    font-family: var(--font-corpo);
+    color: var(--color2);
+    font-weight: var(--fw-bold);
+    display: block;
+    margin-bottom: 22px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .sobre-texto p {
+    color: var(--color6);
+    font-size: 0.95rem;
+  }
 
   /* ===== DEPOIMENTOS ===== */
   .secao-depoimentos {
@@ -370,7 +480,7 @@
   .depoimento-card {
     min-width: calc(33.333% - 16px);
     background: var(--branco);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 30px 25px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -380,15 +490,32 @@
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 15px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-titulo);
     font-size: 1.4rem;
     color: white;
-    font-weight: 700;
+    font-weight: var(--fw-bold);
   }
-  .dep-estrelas { color: var(--color2); font-size: 1rem; margin-bottom: 8px; }
-  .dep-nome { font-weight: 700; color: var(--color1); margin-bottom: 5px; font-size: 0.9rem; }
-  .dep-texto { font-size: 0.88rem; color: var(--color6); line-height: 1.6; }
-  .dep-plataforma { font-size: 0.75rem; color: #aaa; margin-top: 8px; }
+  .dep-estrelas { color: var(--color2); font-size: 1rem; margin-bottom: 10px; }
+  .dep-nome {
+    font-family: var(--font-corpo);
+    font-weight: var(--fw-bold);
+    color: var(--color1);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  .dep-texto {
+    font-family: var(--font-corpo);
+    font-size: var(--fs-small);
+    color: var(--color6);
+    line-height: 1.7;
+    text-align: center;
+  }
+  .dep-plataforma {
+    font-family: var(--font-corpo);
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 10px;
+  }
 
   .carrossel-dots {
     display: flex; justify-content: center; gap: 8px;
@@ -413,33 +540,35 @@
   .secao-faq h2 { color: var(--color2); text-align: center; margin-bottom: 50px; }
   .faq-lista { max-width: 750px; margin: 0 auto; }
 
-  .faq-item { margin-bottom: 10px; border-radius: 8px; overflow: hidden; }
+  .faq-item { margin-bottom: 10px; border-radius: 10px; overflow: hidden; }
   .faq-item button {
     width: 100%;
     text-align: left;
     background: rgba(255,255,255,0.07);
     border: none;
     padding: 18px 22px;
+    font-family: var(--font-corpo);
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: var(--fw-semi);
     color: var(--branco);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Lato', sans-serif;
     transition: background 0.3s;
+    letter-spacing: 0.1px;
   }
   .faq-item button:hover { background: rgba(255,255,255,0.12); }
-  .faq-item button .fa-plus { color: var(--color2); transition: transform 0.3s; }
+  .faq-item button .fa-plus { color: #89CFF0; transition: transform 0.3s; }
   .faq-item button.aberto .fa-plus { transform: rotate(45deg); }
   .faq-item .content {
     display: none;
     background: rgba(255,255,255,0.04);
-    padding: 15px 22px 20px;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.7;
+    padding: 16px 22px 22px;
+    font-family: var(--font-corpo);
+    font-size: var(--fs-small);
+    color: rgba(255,255,255,0.78);
+    line-height: var(--lh-corpo);
   }
   .faq-item .content.visivel { display: block; }
 
@@ -450,36 +579,73 @@
   }
   .contato-grid {
     display: flex;
-    gap: 40px;
-    align-items: flex-start;
+    gap: 60px;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
-  .contato-info { flex: 1; min-width: 260px; }
+  .contato-foto-container { flex: 0 0 auto; }
   .contato-foto-round {
-    width: 160px; height: 160px;
+    width: 220px; height: 220px;
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
     display: block;
-    margin-bottom: 18px;
+    border: 5px solid var(--color2);
   }
-  .contato-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color1); margin-bottom: 5px; }
-  .contato-info .crp { font-size: 0.85rem; color: var(--color6); margin-bottom: 15px; }
-  .contato-info .contato-wpp { color: var(--color1); font-weight: 700; font-size: 1rem; }
-  .contato-info .contato-wpp i { color: var(--verde-wa); margin-right: 5px; }
+  .contato-info {
+    flex: 1;
+    min-width: 260px;
+    max-width: 500px;
+    text-align: left;
+  }
+  .contato-info h3 {
+    font-family: var(--font-titulo);
+    font-size: 1.6rem;
+    color: var(--color1);
+    margin-bottom: 6px;
+    font-weight: var(--fw-semi);
+  }
+  .contato-info .crp {
+    font-family: var(--font-corpo);
+    font-size: 0.88rem;
+    color: var(--color6);
+    margin-bottom: 16px;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .contato-info .contato-wpp {
+    font-family: var(--font-corpo);
+    color: var(--color1);
+    font-weight: var(--fw-bold);
+    font-size: 1.05rem;
+  }
+  .contato-info .contato-wpp i { color: var(--verde-wa); margin-right: 6px; }
 
   .rodape-aviso {
     background: var(--color1);
     padding: 30px 20px;
     text-align: center;
   }
-  .rodape-aviso p { color: rgba(255,255,255,0.55); font-size: 0.78rem; max-width: 700px; margin: 0 auto 8px; line-height: 1.6; }
+  .rodape-aviso p {
+    font-family: var(--font-corpo);
+    color: rgba(255,255,255,0.55);
+    font-size: var(--fs-xsmall);
+    max-width: 700px;
+    margin: 0 auto 8px;
+    line-height: 1.7;
+    text-align: center;
+  }
   .rodape-aviso a { color: var(--color2); text-decoration: none; }
   .social-links { margin: 15px 0; }
-  .social-links a { color: rgba(255,255,255,0.7); margin: 0 10px; font-size: 1.3rem; transition: color 0.3s; }
+  .social-links a {
+    color: rgba(255,255,255,0.7);
+    margin: 0 10px;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+  }
   .social-links a:hover { color: var(--color2); }
 
   /* ===== BOTÃO FLUTUANTE WHATSAPP ===== */
@@ -499,8 +665,9 @@
     color: var(--texto);
     padding: 8px 18px;
     border-radius: 20px;
+    font-family: var(--font-corpo);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: var(--fw-semi);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
   .wa-circulo {
@@ -518,6 +685,17 @@
     50% { box-shadow: 0 6px 30px rgba(37,211,102,0.7); }
   }
 
+  /* Seta do "Como te ajudo" */
+  .set button .fa-plus {
+    color: #89CFF0;
+    transition: transform 0.3s;
+  }
+
+  /* Links sem sublinhado */
+  .btn-whatsapp, .contato-wpp, .contato-info a {
+    text-decoration: none !important;
+  }
+
   /* ===== RESPONSIVO ===== */
   @media (max-width: 900px) {
     .hero-section { display: none; }
@@ -528,7 +706,14 @@
     .sobre-foto { order: -1; }
     .depoimento-card { min-width: calc(100% - 0px); }
     .contato-grid { flex-direction: column; align-items: center; text-align: center; }
+    .contato-info { text-align: center; }
+    .contato-info .crp { text-align: center; }
     .menu-links { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .contato-grid { flex-direction: column; text-align: center; gap: 30px; }
+    .contato-info { text-align: center; }
   }
 
   @media (max-width: 600px) {
@@ -536,96 +721,7 @@
     .hero-mobile-conteudo h1 { font-size: 1.5rem; }
     .numeros-grid { gap: 30px; }
   }
-  /* 1. ALTERAR A COR DA BARRA DE MENU PARA AZUL BEBÊ */
-  .navbar {
-      background-color: #cae9ff !important; /* Azul bebê suave */
-      /* Caso queira um efeito levemente transparente (estilo Apple), use a linha abaixo: */
-      background: rgba(202, 233, 255, 0.8) !important; 
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  /* 2. ALTERAR O EFEITO DE SETA (BALÃO) DO ESPECIALISTA PARA AZUL CLARO */
-  /* Geralmente esse efeito é feito no pseudo-elemento ::before ou ::after da caixa de texto */
-  .spec-text::before {
-      border-right-color: #0071e3 !important; /* Altera a cor da "setinha" */
-  }
-
-  .spec-text {
-      background-color: #0071e3 !important; /* Deixa o fundo do texto em harmonia com a seta */
-      color: #ffffff !important; /* Garante que o texto fique branco para leitura */
-  }
-
-  /* Caso a sua seta seja um efeito de borda na própria caixa: */
-  .specialist-box-refined {
-      border-left: 4px solid #0071e3 !important;
-  }
-  /* Seta do "Como te ajudo" */
-.set button .fa-plus { 
-  color: #89CFF0; /* Azul Bebê */
-  transition: transform 0.3s; 
-}
-
-/* Seta do "Dúvidas/FAQ" */
-.faq-item button .fa-plus { 
-  color: #89CFF0; /* Azul Bebê */
-  transition: transform 0.3s; 
-}
-/* Ajuste para tirar sublinhado de todos os botões e links de contato */
-.btn-whatsapp, .contato-wpp, .contato-info a {
-  text-decoration: none !important;
-}
-
-/* Nova Simetria da Seção de Contato */
-.contato-grid {
-  display: flex;
-  align-items: center; /* Alinha verticalmente no meio */
-  justify-content: center;
-  gap: 60px; /* Espaço entre a foto e o texto */
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.contato-foto-container {
-  flex: 0 0 auto;
-}
-
-.contato-foto-round {
-  width: 220px; /* Aumentei um pouco para equilibrar */
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: top;
-  display: block;
-  border: 5px solid var(--color2); /* Detalhe em verde bebê */
-}
-
-.contato-info {
-  text-align: left; /* Alinhamento do texto à esquerda para simetria */
-  flex: 1;
-  max-width: 500px;
-}
-
-/* Ajuste Responsivo para Celular */
-@media (max-width: 768px) {
-  .contato-grid {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-  }
-  .contato-info {
-    text-align: center;
-  }
-}
-/* Isso vai justificar todos os parágrafos do site */
-p {
-  margin-bottom: 15px;
-  text-align: justify; /* Justifica o texto */
-  text-justify: inter-word; /* Melhora o espaçamento entre as palavras */
-  hyphens: auto; /* Ajuda a quebrar palavras no celular para não criar espaços grandes */
-}
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   </head>
   <body>
 
@@ -648,19 +744,15 @@ p {
   <!-- ===== HERO DESKTOP ===== -->
   <div id="inicio" class="hero-section">
 
-    <!-- Foto de fundo -->
     <img class="hero-foto" src="perfil-psicologo-matheus-oliveira.png" alt="Matheus Oliveira">
 
-    <!-- SVG decorativo divisor (igual ao da Élida, invertido) -->
     <div class="hero-divisor">
       <svg height="100vh" viewBox="0 0 256 1080" preserveAspectRatio="none" style="height:100vh; width:160px;">
         <defs>
-
           <style type="text/css">
             .fil0 { fill: #e7ecf0; }
             .fil6 { fill: #ffffff; }
           </style>
-          
         </defs>
         <g>
           <path class="fil0" d="M255.99 0l-256 0 0 1080.09 113.62 0c-103.47,-213.58 -124.12,-379.37 -100.21,-519.48 -0.14,-6.17 -0.23,-12.36 -0.23,-18.57 0,-229.74 97.26,-430.9 242.82,-542.04z"></path>
@@ -669,17 +761,21 @@ p {
       </svg>
     </div>
 
-    <!-- Conteúdo hero -->
     <div class="hero-content">
       <span class="hero-pretitulo">Neuropsicologia & Psicologia Clínica</span>
       <h1>Saúde mental com <em style="color:var(--color2); font-style:italic;">excelência</em> clínica</h1>
-      <p class="hero-sub">Atendimento especializado para adolescentes (10+), adultos e idosos. Ciência e empatia para você retomar o protagonismo da sua vida.</p>
+
+      <p class="hero-sub">
+        <strong>Psicologia profunda</strong> para o cuidado da sua <strong>saúde mental</strong>.
+        Um espaço de <strong>escuta qualificada</strong>, baseado na ciência e no respeito à sua história.
+        Atendimento para <strong>adolescentes (10+), adultos e idosos</strong> que buscam compreender, aliviar e transformar seu sofrimento, além de fortalecer a <strong>saúde emocional</strong> e prevenir o adoecimento.
+      </p>
+
       <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20gostaria%20de%20mais%20informações%20sobre%20as%20sessões%20de%20terapia." target="_blank" class="btn-whatsapp">
         <i class="fa-brands fa-whatsapp"></i>&nbsp; Vamos Conversar?
       </a>
     </div>
 
-    <!-- Barra de navegação flutuante no rodapé do hero -->
     <div style="position:absolute; bottom:0; left:0; right:0; z-index:10;">
       <div class="barra-menu-rodape">
         <a href="#atendimento">Terapia Online</a>
@@ -696,10 +792,9 @@ p {
   <div class="hero-mobile">
     <img class="hero-mobile-foto" src="perfil-psicologo-matheus-oliveira.png" alt="Matheus Oliveira">
 
-    <!-- Curva SVG de transição (igual ao site da Élida) -->
-    <svg class="hero-mobile-curva" width="100%" viewBox="0 0 1080 255" style="display:block; margin-top:-1px; background:var(--color1);">
+    <svg class="hero-mobile-curva" width="100%" viewBox="0 0 1080 255" style="display:block; margin-top:-1px; background:#ADD8E6;">
       <defs>
-        <style>.fil2m{fill:#e7ecf0}.fil5m{fill:var(--color2)}</style>
+        <style>.fil2m{fill:#e7ecf0}.fil5m{fill:#ffffff}</style>
       </defs>
       <path class="fil2m" d="M-0.01 0l0 255.98 1080 0 0 -113.61c-213.56,103.46 -379.34,124.1 -519.44,100.2 -6.17,0.14 -12.36,0.23 -18.57,0.23 -229.72,0 -430.86,-97.25 -541.99,-242.8z"></path>
       <path class="fil5m" d="M1079.99 2.06c-266.83,267.11 -604.21,238.23 -784.01,139.12 195.43,114.28 420.69,176.81 784.01,0l0 -139.12z"></path>
@@ -708,32 +803,37 @@ p {
     <div class="hero-mobile-conteudo">
       <span class="hero-pretitulo" style="display:block; margin-bottom:10px;">Neuropsicologia & Psicologia Clínica</span>
       <h1>Saúde mental com <em style="color:var(--color2);">excelência</em> clínica</h1>
-      <p>Atendimento especializado para adolescentes (10+), adultos e idosos. Ciência e empatia a serviço da sua saúde mental.</p>
+
+      <p>
+        <strong>Psicologia profunda</strong> para o cuidado da sua <strong>saúde mental</strong>.
+        Um espaço de <strong>escuta qualificada</strong>, baseado na ciência e no respeito à sua história.
+        Atendimento para <strong>adolescentes (10+), adultos e idosos</strong> que buscam compreender, aliviar e transformar seu sofrimento, além de fortalecer a <strong>saúde emocional</strong> e prevenir o adoecimento.
+      </p>
+
       <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20gostaria%20de%20mais%20informações%20sobre%20as%20sessões%20de%20terapia." target="_blank" class="btn-whatsapp">
         <i class="fa-brands fa-whatsapp"></i>&nbsp; Vamos Conversar?
       </a>
     </div>
   </div>
 
-<div id="atendimento" class="secao-atendimento">
-  <div class="container center">
-    <h2 style="margin-bottom: 20px;">Atendimento Psicológico Online</h2>
-    
-    <!-- Texto aumentado e arredondado -->
-    <p class="subtitulo-secao">
-    Psicologia profunda para o cuidado da sua saúde mental.
-Um espaço de escuta qualificada, baseado na ciência e no respeito à sua história.
-Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, aliviar e transformar seu sofrimento, além de fortalecer a saúde emocional e prevenir o adoecimento.</p>
-<!---    
-    <p style="max-width:680px; margin:0 auto 30px; color:var(--color6); font-size:1.05rem;">
-      A psicoterapia online oferece acolhimento, flexibilidade e continuidade do cuidado, permitindo que você cuide da sua saúde emocional de qualquer lugar, com toda a segurança e sigilo que você merece.
-    </p>
-  -->
-    <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20gostaria%20de%20agendar%20uma%20sessão." target="_blank" class="btn-whatsapp">
-      <i class="fa-brands fa-whatsapp"></i>&nbsp; Agende uma Sessão
-    </a>
+  <!-- ===== SEÇÃO ATENDIMENTO ONLINE ===== -->
+  <div id="atendimento" class="secao-atendimento">
+    <div class="container center">
+      <h2 style="margin-bottom: 20px;">Atendimento Psicológico Online</h2>
+
+      <p class="subtitulo-secao">
+        <strong>Psicólogo com mais de 7 anos de experiência</strong>, especialista em <strong>Neuropsicologia e Psicologia Clínica</strong>, atendendo pela abordagem baseada em <strong>evidências científicas</strong>.
+      </p>
+
+      <p style="max-width:850px; margin:0 auto 30px; color:var(--color6); font-size:1.05rem; line-height: 1.85; text-align:center;">
+        A <strong>psicoterapia online</strong> oferece <strong>acolhimento, flexibilidade e continuidade do cuidado</strong>, permitindo que você cuide da sua <strong>saúde emocional</strong> de qualquer lugar, com toda a <strong>segurança e sigilo</strong> que você merece.
+      </p>
+
+      <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20gostaria%20de%20agendar%20uma%20sessão." target="_blank" class="btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>&nbsp; Agende uma Sessão
+      </a>
+    </div>
   </div>
-</div>
 
   <!-- ===== MÉTRICAS ===== -->
   <div class="secao-numeros">
@@ -756,7 +856,6 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
   <!-- ===== COMO TE AJUDO ===== -->
   <div id="como-te-ajudo" class="secao-ajudo">
 
-    <!-- Foto decorativa lateral (oculta no mobile) -->
     <img class="foto-sessao" src="perfil-psicologo-matheus-oliveira.png" alt="Matheus Oliveira - Como te ajudo">
 
     <div class="container">
@@ -764,7 +863,6 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
         <h2 style="color:var(--color1);">Como te Ajudo</h2>
         <p>Ofereço um espaço de escuta acolhedora, unindo o rigor científico da Neuropsicologia com a sensibilidade da Psicologia Clínica. Cada processo terapêutico é conduzido com ética, empatia e foco nos seus objetivos.</p>
 
-        <!-- Acordeão -->
         <div class="set">
           <button onclick="toggleAcordeon(this)">
             TDAH e TDA <i class="fa fa-plus"></i>
@@ -833,7 +931,8 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
       </div>
     </div>
   </div>
-<!-- ===== SOBRE MIM ===== -->
+
+  <!-- ===== SOBRE MIM ===== -->
   <section id="sobre" class="secao-sobre">
     <div class="sobre-grid">
       <div class="sobre-foto">
@@ -842,15 +941,15 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
       <div class="sobre-texto">
         <h2>Muito prazer em receber você aqui!</h2>
         <span class="subtitulo">Conheça Matheus Oliveira</span>
-        
+
         <p>Olá, meu nome é <strong>Matheus Oliveira</strong>, psicólogo clínico com mais de <strong>9 anos de experiência</strong>, especialista em Neuropsicologia, com atuação voltada à saúde mental e aos transtornos do neurodesenvolvimento.</p>
-        
+
         <p>Minha prática clínica é fundamentada na <strong>psicologia analítica de Carl Gustav Jung</strong>, integrando também contribuições da psicanálise, com um olhar aprofundado sobre a subjetividade, os processos inconscientes e a construção da identidade. Conduzo os atendimentos a partir de uma escuta qualificada, ética e humanizada.</p>
-        
+
         <p>Minha trajetória é marcada por uma origem simples, o que desenvolveu em mim uma prática sensível às realidades sociais. Atuei em contextos de psicologia social e institucional, incluindo experiências no <strong>CRAS, CREAS</strong> e serviços de acolhimento para crianças em situação de vulnerabilidade. Atualmente, desenvolvo trabalho social junto à <strong>ONG Projeto Mão Amiga</strong>, fortalecendo meu compromisso com uma psicologia acessível.</p>
-        
+
         <p>Na clínica, tenho atuação marcante com <strong>adolescentes e jovens</strong>, acompanhando demandas relacionadas à ansiedade, conflitos familiares e dinâmicas disfuncionais. Busco não apenas o alívio do sofrimento, mas a construção de autonomia emocional e desenvolvimento pessoal.</p>
-        
+
         <p>Acredito que a psicoterapia deve ser um espaço de transformação genuína, onde técnica e sensibilidade caminham juntas, possibilitando ao indivíduo ressignificar experiências e construir uma vida com mais sentido e equilíbrio.</p>
 
         <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20li%20sua%20história%20no%20site%20e%20gostaria%20de%20mais%20informações." target="_blank" class="btn-whatsapp">
@@ -859,6 +958,7 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
       </div>
     </div>
   </section>
+
   <!-- ===== DEPOIMENTOS ===== -->
   <div id="depoimentos" class="secao-depoimentos">
     <div class="container">
@@ -968,26 +1068,25 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
       </div>
     </div>
   </section>
-<!-- ===== CONTATO ===== -->
+
+  <!-- ===== CONTATO ===== -->
   <div id="contato" class="secao-contato">
     <div class="contato-grid">
-      
-      <!-- Lado Esquerdo: Foto -->
+
       <div class="contato-foto-container">
         <img class="contato-foto-round" src="footer-matheus.png" alt="Matheus Oliveira">
       </div>
 
-      <!-- Lado Direito: Informações -->
       <div class="contato-info">
         <h3>Matheus Oliveira</h3>
         <p class="crp">Neuropsicólogo & Psicólogo Clínico<br>CRP 03/18092</p>
-        
+
         <p class="contato-wpp">
           <a href="https://wa.me/5573988177680" target="_blank" style="color: inherit;">
             <i class="fa-brands fa-whatsapp"></i> +55 (73) 98817-7680
           </a>
         </p>
-        
+
         <br>
         <a href="https://wa.me/5573988177680?text=Olá,%20Matheus,%20gostaria%20de%20mais%20informações%20sobre%20as%20sessões%20de%20terapia." target="_blank" class="btn-whatsapp">
           <i class="fa-brands fa-whatsapp"></i>&nbsp; Fale Comigo!
@@ -1007,9 +1106,17 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
     <p><strong>Atenção:</strong> Este site não oferece atendimento imediato a pessoas em situação de emergência. Em caso de crise, ligue para o <strong>188</strong> (CVV – Centro de Valorização da Vida) ou acesse o SAMU pelo <strong>192</strong>.</p>
     <p>© Matheus Oliveira <script>document.write(new Date().getFullYear());</script>. Todos os direitos reservados.</p>
   </div>
+
+  <!-- ===== BOTÃO FLUTUANTE WHATSAPP ===== -->
+  <div id="btnwhatsapp">
+    <div class="wa-balao">Agende sua sessão</div>
+    <a href="https://wa.me/5573988177680" target="_blank">
+      <div class="wa-circulo"><i class="fa-brands fa-whatsapp"></i></div>
+    </a>
+  </div>
+
   <!-- ===== SCRIPTS ===== -->
   <script>
-  // Menu fixo ao rolar
   window.addEventListener('scroll', function() {
     const menu = document.getElementById('menu-fixo');
     const btn = document.getElementById('btnwhatsapp');
@@ -1022,20 +1129,16 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
     }
   });
 
-  // Acordeão "Como te Ajudo"
   function toggleAcordeon(btn) {
     const content = btn.nextElementSibling;
     const isAberto = btn.classList.contains('aberto');
-    // Fecha todos
     document.querySelectorAll('.set button').forEach(b => { b.classList.remove('aberto'); b.nextElementSibling.classList.remove('visivel'); });
-    // Abre o clicado se estava fechado
     if (!isAberto) {
       btn.classList.add('aberto');
       content.classList.add('visivel');
     }
   }
 
-  // FAQ
   function toggleFaq(btn) {
     const content = btn.nextElementSibling;
     const isAberto = btn.classList.contains('aberto');
@@ -1046,7 +1149,6 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
     }
   }
 
-  // Carrossel de Depoimentos
   (function() {
     const track = document.getElementById('carrossel');
     const dotsContainer = document.getElementById('dots');
@@ -1069,7 +1171,7 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
 
     function goTo(idx) {
       atual = idx;
-      const cardWidth = cards[0].offsetWidth + 24; // gap
+      const cardWidth = cards[0].offsetWidth + 24;
       track.style.transform = `translateX(-${idx * perSlide * cardWidth}px)`;
       dotsContainer.querySelectorAll('button').forEach((b, i) => {
         b.classList.toggle('ativo', i === idx);
@@ -1079,7 +1181,6 @@ Atendimento para adolescentes (10+), adultos e idosos que buscam compreender, al
     buildDots();
     window.addEventListener('resize', () => { buildDots(); goTo(0); });
 
-    // Auto-play
     setInterval(() => {
       const next = (atual + 1) % total;
       goTo(next);
