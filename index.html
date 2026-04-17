@@ -721,6 +721,56 @@
     .hero-mobile-conteudo h1 { font-size: 1.5rem; }
     .numeros-grid { gap: 30px; }
   }
+    /* ===== BOTÃO FLUTUANTE WHATSAPP ===== */
+  #btnwhatsapp {
+    position: fixed;
+    bottom: 25px; 
+    right: 25px;
+    z-index: 9999;
+    display: none; /* Inicia escondido e aparece ao rolar a página */
+    align-items: center;
+    gap: 10px;
+    text-decoration: none !important;
+  }
+
+  #btnwhatsapp.ativo {
+    display: flex;
+  }
+
+  /* Links internos do botão sem sublinhado */
+  .btn-whatsapp, .contato-wpp, .contato-info a, #btnwhatsapp a {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .wa-balao {
+    background: var(--branco);
+    color: var(--texto);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-family: var(--font-corpo);
+    font-size: 0.85rem;
+    font-weight: var(--fw-semi);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    white-space: nowrap;
+  }
+
+  .wa-circulo {
+    width: 62px; height: 62px;
+    background: var(--verde-wa);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    color: white;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+    animation: pulsar 2s infinite;
+  }
+
+  @keyframes pulsar {
+    0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 6px 30px rgba(37,211,102,0.7); }
+  }
   </style>
   </head>
   <body>
