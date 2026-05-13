@@ -2767,51 +2767,45 @@
       console.error('Erro ao carregar o blog:', error);
       document.getElementById('blog-posts').innerHTML = '<p class="center">Não foi possível carregar as postagens. Visite o blog diretamente.</p>';
     });
-  // 1. Função que processa os dados do Blogger
-function carregarPostsBlogger(data) {
-    const postsContainer = document.getElementById('blog-posts');
-    if (!postsContainer) return;
-    postsContainer.innerHTML = ''; 
+    function carregarPostsBlogger(data) {
+  const postsContainer = document.getElementById('blog-posts');
+  if (!postsContainer) return;
+  postsContainer.innerHTML = '';
 
-    const entries = data.feed.entry;
-    if (!entries) {
-        postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
-        return;
+  const entries = data.feed.entry;
+  if (!entries) {
+    postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
+    return;
+  }
+
+  entries.forEach(entry => {
+    const title = entry.title.$t;
+    const link = entry.link.find(l => l.rel === 'alternate').href;
+
+    // ✅ CORREÇÃO DE IMAGEM: substitui QUALQUER tamanho pelo original
+    let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800";
+
+    if (entry.media$thumbnail) {
+      // Remove /sXXX-c/ ou /sXXX/ e substitui por /s1600/
+      imgUrl = entry.media$thumbnail.url
+        .replace(/=s[0-9]+-c$/, '=s1600')   // formato ?=s72-c no final
+        .replace(/\/s[0-9]+-c\//, '/s1600/') // formato /s72-c/ no meio
+        .replace(/\/s[0-9]+\//, '/s1600/');  // formato /s72/ sem -c
     }
 
-    entries.forEach(entry => {
-        const title = entry.title.$t;
-        const link = entry.link.find(l => l.rel === 'alternate').href;
-        
-        // --- CORREÇÃO DA QUALIDADE DA IMAGEM ---
-        let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800"; // Imagem padrão
-        
-        if (entry.media$thumbnail) {
-            let thumb = entry.media$thumbnail.url;
-            // O segredo está aqui: trocamos qualquer tamanho pequeno (s72, s320, etc) por s800
-            imgUrl = thumb.replace(/\/s[0-9]+(-c)?\//, '/s800/');
-        } else if (entry.content && entry.content.$t.includes('<img')) {
-            // Se não tiver thumbnail mas tiver imagem no corpo do texto, tenta pegar a primeira
-            const regex = /<img.*?src="(.*?)"/;
-            imgUrl = entry.content.$t.match(regex)[1];
-        }
+    let content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : "");
+    let snippet = content.replace(/<[^>]*>?/gm, '').substring(0, 100) + "...";
 
-        // Limpa o resumo do texto (remove HTML)
-        let content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : "");
-        let snippet = content.replace(/<[^>]*>?/gm, '').substring(0, 100) + "...";
-
-        const postCard = `
-          <a href="${link}" target="_blank" class="blog-card">
-            <img src="${imgUrl}" alt="${title}" class="blog-thumb">
-            <div class="blog-content">
-              <h3>${title}</h3>
-              <p class="blog-resumo">${snippet}</p>
-              <span class="blog-ler-mais">Ler Artigo Completo →</span>
-            </div>
-          </a>
-        `;
-        postsContainer.innerHTML += postCard;
-    });
+    postsContainer.innerHTML += `
+      <a href="${link}" target="_blank" class="blog-card">
+        <img src="${imgUrl}" alt="${title}" class="blog-thumb">
+        <div class="blog-content">
+          <h3>${title}</h3>
+          <p class="blog-resumo">${snippet}</p>
+          <span class="blog-ler-mais">Ler Artigo Completo →</span>
+        </div>
+      </a>`;
+  });
 }
 
 // 2. Controle do Menu Fixo e Botão WhatsApp
@@ -2896,47 +2890,46 @@ function toggleFaq(btn) {
   </script>
 <script>
   // 1. FUNÇÃO DO BLOGGER COM CORREÇÃO DE ALTA QUALIDADE
-  function carregarPostsBlogger(data) {
-    const postsContainer = document.getElementById('blog-posts');
-    if (!postsContainer) return;
-    postsContainer.innerHTML = ''; 
+function carregarPostsBlogger(data) {
+  const postsContainer = document.getElementById('blog-posts');
+  if (!postsContainer) return;
+  postsContainer.innerHTML = '';
 
-    const entries = data.feed.entry;
-    if (!entries) {
-      postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
-      return;
+  const entries = data.feed.entry;
+  if (!entries) {
+    postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
+    return;
+  }
+
+  entries.forEach(entry => {
+    const title = entry.title.$t;
+    const link = entry.link.find(l => l.rel === 'alternate').href;
+
+    // ✅ CORREÇÃO DE IMAGEM: substitui QUALQUER tamanho pelo original
+    let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800";
+
+    if (entry.media$thumbnail) {
+      // Remove /sXXX-c/ ou /sXXX/ e substitui por /s1600/
+      imgUrl = entry.media$thumbnail.url
+        .replace(/=s[0-9]+-c$/, '=s1600')   // formato ?=s72-c no final
+        .replace(/\/s[0-9]+-c\//, '/s1600/') // formato /s72-c/ no meio
+        .replace(/\/s[0-9]+\//, '/s1600/');  // formato /s72/ sem -c
     }
 
-    entries.forEach(entry => {
-      const title = entry.title.$t;
-      const link = entry.link.find(l => l.rel === 'alternate').href;
-      
-      // --- SUPER CORREÇÃO DE IMAGEM (Força o tamanho original s1600) ---
-      let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800"; // Fallback elegante
-      
-      if (entry.media$thumbnail) {
-          let thumb = entry.media$thumbnail.url;
-          // Trocamos 's72-c' ou qualquer 'sXXX' por 's1600' para qualidade máxima
-          imgUrl = thumb.replace('s72-c', 's1600').replace(/\/s[0-9]+(-c)?\//, '/s1600/');
-      }
+    let content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : "");
+    let snippet = content.replace(/<[^>]*>?/gm, '').substring(0, 100) + "...";
 
-      // Limpa o resumo do texto
-      let content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : "");
-      let snippet = content.replace(/<[^>]*>?/gm, '').substring(0, 100) + "...";
-
-      const postCard = `
-        <a href="${link}" target="_blank" class="blog-card">
-          <img src="${imgUrl}" alt="${title}" class="blog-thumb">
-          <div class="blog-content">
-            <h3>${title}</h3>
-            <p class="blog-resumo">${snippet}</p>
-            <span class="blog-ler-mais">Ler Artigo Completo →</span>
-          </div>
-        </a>
-      `;
-      postsContainer.innerHTML += postCard;
-    });
-  }
+    postsContainer.innerHTML += `
+      <a href="${link}" target="_blank" class="blog-card">
+        <img src="${imgUrl}" alt="${title}" class="blog-thumb">
+        <div class="blog-content">
+          <h3>${title}</h3>
+          <p class="blog-resumo">${snippet}</p>
+          <span class="blog-ler-mais">Ler Artigo Completo →</span>
+        </div>
+      </a>`;
+  });
+}
 
   // 2. CHAMADA DO BLOGGER (JSONP)
   const scriptBlogger = document.createElement('script');
