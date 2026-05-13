@@ -829,7 +829,39 @@
     letter-spacing: 1px;
     margin-top: auto;
   }
-    
+    /* Correção para o Hero Desktop (Topo do site) */
+.hero-foto {
+  position: absolute;
+  right: 0; 
+  top: 0;
+  width: 55%;
+  height: 100%;
+  object-fit: cover; 
+  /* Mudamos para focar 100% no topo e centralizar horizontalmente */
+  object-position: top center !important; 
+}
+
+/* Correção para o Hero Mobile */
+.hero-mobile-foto {
+  width: 100%;
+  /* Aumentamos um pouco a altura para a cabeça ter espaço */
+  height: 60vh; 
+  object-fit: cover;
+  /* Garante que o topo da imagem (cabeça) seja a prioridade */
+  object-position: top center !important;
+}
+
+/* Correção para a seção "Como te ajudo" (A que mais corta) */
+.foto-sessao {
+  position: absolute;
+  right: 0; 
+  top: 0;
+  height: 100%;
+  width: 42%;
+  object-fit: cover;
+  /* Estava 'center', mudamos para 'top' */
+  object-position: top center !important;
+}
   </style>
   </head>
   <body>
