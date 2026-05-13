@@ -3006,10 +3006,54 @@ function carregarPostsBlogger(data) {
     setInterval(() => { const next = (atual + 1) % total; goTo(next); }, 5000);
   })();
   </script>
-    
-  </body>
-  </html>
-  </script>
+<script>
+function carregarPostsBlogger(data) {
+  const postsContainer = document.getElementById('blog-posts');
+  if (!postsContainer) return;
+  postsContainer.innerHTML = '';
 
+  const entries = data.feed.entry;
+  if (!entries) {
+    postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
+    return;
+  }
+
+  entries.forEach(entry => {
+    const title = entry.title.$t;
+    const link = entry.link.find(l => l.rel === 'alternate').href;
+
+    // ✅ Extrai imagem direto do HTML do post (qualidade original)
+    let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800";
+    const htmlContent = entry.content ? entry.content.$t : "";
+    const imgMatch = htmlContent.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (imgMatch && imgMatch[1]) {
+      imgUrl = imgMatch[1];
+    } else if (entry.media$thumbnail) {
+      // fallback: tenta aumentar resolução do thumbnail
+      imgUrl = entry.media$thumbnail.url.replace(/s[0-9]+-c/, 's1600');
+    }
+
+    // Resumo limpo
+    let snippet = htmlContent.replace(/<[^>]*>?/gm, '').trim().substring(0, 100) + "...";
+
+    postsContainer.innerHTML += `
+      <a href="${link}" target="_blank" class="blog-card">
+        <img src="${imgUrl}" alt="${title}" class="blog-thumb" onerror="this.src='https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800'">
+        <div class="blog-content">
+          <h3>${title}</h3>
+          <p class="blog-resumo">${snippet}</p>
+          <span class="blog-ler-mais">Ler Artigo Completo →</span>
+        </div>
+      </a>`;
+  });
+}
+
+// Carrega os posts via JSONP
+(function() {
+  const s = document.createElement('script');
+  s.src = "https://psicologomatheus.blogspot.com/feeds/posts/default?alt=json-in-script&callback=carregarPostsBlogger&max-results=3";
+  document.body.appendChild(s);
+})();
+</script>    
   </body>
   </html>
