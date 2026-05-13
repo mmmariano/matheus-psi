@@ -771,6 +771,64 @@
     0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
     50% { box-shadow: 0 6px 30px rgba(37,211,102,0.7); }
   }
+    /* ===== ESTILO BLOG ===== */
+  .secao-blog {
+    padding: 80px 20px;
+    background: var(--branco);
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .blog-card {
+    background: var(--color5);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .blog-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .blog-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-card h3 {
+    font-size: 1.2rem;
+    color: var(--color1);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .blog-resumo {
+    font-size: var(--fs-small);
+    color: var(--color6);
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  .blog-ler-mais {
+    font-weight: var(--fw-bold);
+    color: var(--color2);
+    font-size: var(--fs-xsmall);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+  }
   </style>
   </head>
   <body>
@@ -1085,6 +1143,21 @@
       <div class="carrossel-dots" id="dots"></div>
     </div>
   </div>
+
+<!-- ===== SEÇÃO BLOG ===== -->
+<section id="blog" class="secao-blog">
+  <div class="container">
+    <h2 class="center" style="margin-bottom: 40px;">Artigos e Reflexões</h2>
+    <div id="blog-posts" class="blog-grid">
+      <!-- Os posts serão injetados aqui pelo JavaScript -->
+      <p class="center">Carregando últimas postagens...</p>
+    </div>
+    <div class="center" style="margin-top: 40px;">
+      <a href="https://psicologomatheus.blogspot.com/" target="_blank" class="btn-outline">Ver todos os artigos</a>
+    </div>
+  </div>
+</section>
+    
   <!-- ===== DÚVIDAS (FAQ) ===== -->
   <section id="duvidas" class="secao-faq">
     <div class="container">
@@ -1268,6 +1341,58 @@
       goTo(next);
     }, 5000);
   })();
+    // Configuração do Blog
+  const blogUrl = "https://psicologomatheus.blogspot.com/feeds/posts/default?alt=json&max-results=3";
+
+  fetch(blogUrl)
+    .then(response => response.json())
+    .then(data => {
+      const postsContainer = document.getElementById('blog-posts');
+      postsContainer.innerHTML = ''; // Limpa o texto de carregamento
+
+      const entries = data.feed.entry;
+
+      if (!entries) {
+        postsContainer.innerHTML = '<p class="center">Nenhuma postagem encontrada.</p>';
+        return;
+      }
+
+      entries.forEach(entry => {
+        // Pega o título
+        const title = entry.title.$t;
+        
+        // Pega o link do post
+        const link = entry.link.find(l => l.rel === 'alternate').href;
+        
+        // Tenta pegar a imagem do post (se não tiver, usa um placeholder)
+        let imgUrl = "https://images.unsplash.com/photo-1518384403043-d7d636584160?q=80&w=800&auto=format&fit=crop"; // Imagem padrão
+        if (entry.media$thumbnail) {
+            // Aumenta a qualidade da miniatura do Blogger de s72 para s600
+            imgUrl = entry.media$thumbnail.url.replace('s72-c', 's600');
+        }
+
+        // Pega um resumo do texto e remove tags HTML
+        let snippet = entry.summary ? entry.summary.$t : entry.content.$t;
+        snippet = snippet.replace(/<[^>]*>?/gm, '').substring(0, 120) + "...";
+
+        // Cria o HTML do Card
+        const postCard = `
+          <a href="${link}" target="_blank" class="blog-card">
+            <img src="${imgUrl}" alt="${title}" class="blog-thumb">
+            <div class="blog-content">
+              <h3>${title}</h3>
+              <p class="blog-resumo">${snippet}</p>
+              <span class="blog-ler-mais">Ler Artigo Completo →</span>
+            </div>
+          </a>
+        `;
+        postsContainer.innerHTML += postCard;
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao carregar o blog:', error);
+      document.getElementById('blog-posts').innerHTML = '<p class="center">Não foi possível carregar as postagens. Visite o blog diretamente.</p>';
+    });
   </script>
 
   </body>
