@@ -2894,7 +2894,126 @@ function toggleFaq(btn) {
 })();
     
   </script>
+<script>
+  // 1. FUNÇÃO DO BLOGGER COM CORREÇÃO DE ALTA QUALIDADE
+  function carregarPostsBlogger(data) {
+    const postsContainer = document.getElementById('blog-posts');
+    if (!postsContainer) return;
+    postsContainer.innerHTML = ''; 
 
+    const entries = data.feed.entry;
+    if (!entries) {
+      postsContainer.innerHTML = '<p class="center">Visite meu blog para ler os artigos.</p>';
+      return;
+    }
+
+    entries.forEach(entry => {
+      const title = entry.title.$t;
+      const link = entry.link.find(l => l.rel === 'alternate').href;
+      
+      // --- SUPER CORREÇÃO DE IMAGEM (Força o tamanho original s1600) ---
+      let imgUrl = "https://images.unsplash.com/photo-1544717297-fa95b3ee9263?q=80&w=800"; // Fallback elegante
+      
+      if (entry.media$thumbnail) {
+          let thumb = entry.media$thumbnail.url;
+          // Trocamos 's72-c' ou qualquer 'sXXX' por 's1600' para qualidade máxima
+          imgUrl = thumb.replace('s72-c', 's1600').replace(/\/s[0-9]+(-c)?\//, '/s1600/');
+      }
+
+      // Limpa o resumo do texto
+      let content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : "");
+      let snippet = content.replace(/<[^>]*>?/gm, '').substring(0, 100) + "...";
+
+      const postCard = `
+        <a href="${link}" target="_blank" class="blog-card">
+          <img src="${imgUrl}" alt="${title}" class="blog-thumb">
+          <div class="blog-content">
+            <h3>${title}</h3>
+            <p class="blog-resumo">${snippet}</p>
+            <span class="blog-ler-mais">Ler Artigo Completo →</span>
+          </div>
+        </a>
+      `;
+      postsContainer.innerHTML += postCard;
+    });
+  }
+
+  // 2. CHAMADA DO BLOGGER (JSONP)
+  const scriptBlogger = document.createElement('script');
+  scriptBlogger.src = "https://psicologomatheus.blogspot.com/feeds/posts/default?alt=json-in-script&callback=carregarPostsBlogger&max-results=3";
+  document.body.appendChild(scriptBlogger);
+
+  // 3. CONTROLE DE INTERFACE (Scroll, Menu, WhatsApp)
+  window.addEventListener('scroll', function() {
+    const menu = document.getElementById('menu-fixo');
+    const btn = document.getElementById('btnwhatsapp');
+    if (window.scrollY > 10) {
+      menu.classList.add('ativo');
+      btn.classList.add('ativo');
+    } else {
+      menu.classList.remove('ativo');
+      btn.classList.remove('ativo');
+    }
+  });
+
+  // 4. FUNÇÕES DE ACORDEON (FAQ e Serviços)
+  function toggleAcordeon(btn) {
+    const content = btn.nextElementSibling;
+    const isAberto = btn.classList.contains('aberto');
+    document.querySelectorAll('.set button').forEach(b => { b.classList.remove('aberto'); b.nextElementSibling.classList.remove('visivel'); });
+    if (!isAberto) {
+      btn.classList.add('aberto');
+      content.classList.add('visivel');
+    }
+  }
+
+  function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const isAberto = btn.classList.contains('aberto');
+    document.querySelectorAll('.faq-item button').forEach(b => { b.classList.remove('aberto'); b.nextElementSibling.classList.remove('visivel'); });
+    if (!isAberto) {
+      btn.classList.add('aberto');
+      content.classList.add('visivel');
+    }
+  }
+
+  // 5. CARROSSEL DE DEPOIMENTOS
+  (function() {
+    const track = document.getElementById('carrossel');
+    const dotsContainer = document.getElementById('dots');
+    if(!track || !dotsContainer) return;
+    const cards = track.querySelectorAll('.depoimento-card');
+    let atual = 0;
+    let perSlide = window.innerWidth > 900 ? 3 : 1;
+    let total = Math.ceil(cards.length / perSlide);
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      perSlide = window.innerWidth > 900 ? 3 : 1;
+      total = Math.ceil(cards.length / perSlide);
+      for (let i = 0; i < total; i++) {
+        const btn = document.createElement('button');
+        if (i === atual) btn.classList.add('ativo');
+        btn.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(btn);
+      }
+    }
+
+    function goTo(idx) {
+      atual = idx;
+      const cardWidth = cards[0].offsetWidth + 24;
+      track.style.transform = `translateX(-${idx * perSlide * cardWidth}px)`;
+      dotsContainer.querySelectorAll('button').forEach((b, i) => {
+        b.classList.toggle('ativo', i === idx);
+      });
+    }
+
+    buildDots();
+    window.addEventListener('resize', () => { buildDots(); goTo(0); });
+    setInterval(() => { const next = (atual + 1) % total; goTo(next); }, 5000);
+  })();
+  </script>
+    
   </body>
   </html>
   </script>
